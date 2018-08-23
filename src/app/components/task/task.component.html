@@ -1,4 +1,4 @@
-<div *ngIf="tasks?.length> 0; else noTask">
+<div class="margin-up" *ngIf="tasks?.length> 0; else noTask">
   <ul *ngFor="let task of tasks" class="collection">
     <li class="collection-item">
       <strong>{{ task.title }} :</strong> {{ task.description }}
