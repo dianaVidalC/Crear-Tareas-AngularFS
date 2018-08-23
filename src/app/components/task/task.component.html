@@ -1,3 +1,25 @@
-<p>
-  task works!
-</p>
+<div *ngIf="tasks?.length> 0; else noTask">
+  <ul *ngFor="let task of tasks" class="collection">
+    <li class="collection-item">
+      <strong>{{ task.title }} :</strong> {{ task.description }}
+      <div class="secondary-content">
+        <a href="#" (click)="deleteTask($event,task)"><i class="fa fa-trash-o"></i></a>
+        <a href="#" (click)="editTask($event,task)"><i class="fa fa-pencil"></i></a>
+      </div>
+      <div *ngIf="editState && taskToEdit.id == task.id">
+        <form (ngSubmit)="updateTask()">
+          <div class="input-field col-s6">
+            <input type="text" name="title" placeholder="Edita el título" [(ngModel)]="task.title">
+          </div>
+          <div class="input-field col-s6">
+            <input type="text" name="description" placeholder="Edita la descripción" [(ngModel)]="task.description">
+          </div>
+          <input type="submit" value="Actualizar" class="btn" (click)="updateTask(task)">
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>
+<ng-template #noTask>
+  <h5>No ha agregado tareas.</h5>
+</ng-template>

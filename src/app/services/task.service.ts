@@ -6,8 +6,6 @@ import { Task } from '../models/task';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -34,9 +32,11 @@ export class TaskService {
     this.tasksCollection.add(task);
   }
   deleteTask(task: Task){
-
+    this.taskDoc = this.afs.doc(`tareas/${task.id}`);
+    this.taskDoc.delete();
   }
   updateTask(task: Task){
-
+    this.taskDoc = this.afs.doc(`tareas/${task.id}`);
+    this.taskDoc.update(task);
   }
 }
